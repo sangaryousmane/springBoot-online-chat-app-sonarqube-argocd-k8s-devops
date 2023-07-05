@@ -1,2 +1,5 @@
-package com.example.onlinechatapplication.chat;public enum MessageType {
+package com.example.onlinechatapplication.chat;
+
+public enum MessageType {
+    CHAT, JOIN, LEAVE
 }
