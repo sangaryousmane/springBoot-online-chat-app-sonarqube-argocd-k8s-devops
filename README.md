@@ -32,4 +32,5 @@ To build and run the project, follow these steps:
 * Run the project: mvn spring-boot:run
 * Please note that there is CI/CD support that build, test and deploy your docker image to docker hub for you
   -> The application will be available at http://localhost:8080.
-* All manifest file relating to k8s can be foundin the /k8s directory. Navigate there and get some insight of the configuration
+* All manifest file relating to k8s can be found in the /k8s directory
+Navigate there and get some insight of the configuration
