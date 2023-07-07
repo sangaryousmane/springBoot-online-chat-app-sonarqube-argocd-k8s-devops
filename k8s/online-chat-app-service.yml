@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: online-chat-app-svc
+spec:
+  selector:
+    app: online-chat-app-svc
+  ports:
+    - port: 80
+      targetPort: 9500
