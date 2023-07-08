@@ -1,10 +1,12 @@
-apiVersion: v1
-kind: Service
-metadata:
-  name: online-chat-app-svc
+apiVersion: v1 # Kubernetes API version
+kind: Service # Kubernetes resource kind we are creating
+metadata: # Metadata of the resource kind we are creating
+  name: online-chat-app
 spec:
   selector:
-    app: online-chat-app-svc
+    app: online-chat-app
   ports:
-    - port: 80
-      targetPort: 9500
+    - protocol: "TCP"
+      port: 9500 # The port that the service is running on in the cluster
+      targetPort: 9500 # The port exposed by the service
+  type: NodePort # type of the service.
