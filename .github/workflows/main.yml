@@ -2,7 +2,7 @@ name: Build Chat App With Spring Web Socket
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   build-deploy:
