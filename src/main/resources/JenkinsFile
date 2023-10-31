@@ -37,7 +37,7 @@ pipeline {
       }
       steps {
         script {
-            sh 'cdspring-boot-websocket-chat-app-main && docker build -t ${DOCKER_IMAGE} .'
+            sh 'cd spring-boot-websocket-chat-app-main && docker build -t ${DOCKER_IMAGE} .'
             def dockerImage = docker.image("${DOCKER_IMAGE}")
             docker.withRegistry('https://index.docker.io/v1/', "docker-cred") {
                 dockerImage.push()
@@ -63,7 +63,7 @@ pipeline {
                     git reset --hard HEAD
 
                     # Update the deployment file
-                    sed -i "s|image: salmanmalik98/jenkins-cicd:.*|image: salmanmalik98/jenkins-cicd:${BUILD_NUMBER}|" spring-boot-app-manifests/deployment.yml
+                    sed -i "s|image: ousmane1999/chat-app:.*|image: ousmane1999/chat-app:${BUILD_NUMBER}|" spring-boot-websocket-chat-app-main/k8s/chat-deployment.yaml
                     git add springBoot-online-chat-app-sonarqube-argocd-k8s-devops/k8s/chat-deployment.yaml
                     git commit -m "Update deployment image to version ${BUILD_NUMBER}"
                     git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
