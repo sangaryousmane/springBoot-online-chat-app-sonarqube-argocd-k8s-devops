@@ -21,7 +21,7 @@ pipeline {
     }
     stage('Static Code Analysis with sonarqube') {
       environment {
-        SONAR_URL = "http://13.50.106.44:9000" // replace with the public ip-address of the instance you are using
+        SONAR_URL = "http://34.210.215.67:9000" // replace with the public ip-address of the instance you are using
       }
       steps {
         withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
