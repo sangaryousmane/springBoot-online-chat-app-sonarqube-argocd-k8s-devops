@@ -1,10 +1,21 @@
-FROM openjdk:17
+FROM adoptopenjdk/maven-openjdk11:latest AS builder
 
+WORKDIR /opt/app
 
-WORKDIR /opt/chat-app
+COPY . .
 
-ARG JAR_FILE=target/chat-app.jar
+RUN mvn clean package
 
-COPY ${JAR_FILE} chat-app.jar
+# You can change this base image to anything else
+# But make sure to use the correct version of Java
 
+FROM adoptopenjdk/openjdk11:alpine-jre
+
+WORKDIR /opt/app
+
+COPY --from=builder /opt/app/target/chat-app.jar /opt/app/chat-app.jar
+
+USER nobody
+
+# This should not be changed
 ENTRYPOINT ["java", "-jar", "chat-app.jar"]
