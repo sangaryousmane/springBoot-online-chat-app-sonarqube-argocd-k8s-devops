@@ -16,7 +16,7 @@ pipeline {
       steps {
         sh 'ls -ltr'
         // build the project and create a JAR file
-        sh 'cd springBoot-online-cha && mvn clean package'
+        sh 'mvn clean package'
       }
     }
     stage('Static Code Analysis with sonarqube') {
@@ -25,7 +25,7 @@ pipeline {
       }
       steps {
         withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
-          sh 'cd src/main && mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
+          sh 'mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
         }
       }
     }
@@ -63,8 +63,8 @@ pipeline {
                     git reset --hard HEAD
 
                     # Update the deployment file
-                    sed -i "s|image: ousmane1999/chat-app:.*|image: ousmane1999/chat-app:${BUILD_NUMBER}|" spring-boot-websocket-chat-app-main/k8s/chat-deployment.yaml
-                    git add springBoot-online-chat-app-sonarqube-argocd-k8s-devops/k8s/chat-deployment.yaml
+                    sed -i "s|image: ousmane1999/chat-app:.*|image: ousmane1999/chat-app:${BUILD_NUMBER}|" k8s/chat-deployment.yaml
+                    git add k8s/chat-deployment.yaml
                     git commit -m "Update deployment image to version ${BUILD_NUMBER}"
                     git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
                 '''
